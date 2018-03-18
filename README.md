@@ -12,9 +12,10 @@ We are using Python 3.5 for the development enviornment, so you might
 want to make sure Python35 is installed.
 
 # To Do
-- [] Process the data set
-- [] build a tree
-- [] testing for accuracy
+
+- [ ] Process the data set
+- [ ] build a tree
+- [ ] test for accuracy
 
 # Test Coverage
 - 0.00%
