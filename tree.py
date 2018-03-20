@@ -26,7 +26,7 @@ class Query():
     evaluate the question for a given row
     """
 
-    def __init__(self, column, eval_method, threshold):
+    def __init__(self, column, eval_method="==", threshold):
         self.column = column
         self.eval_method = eval_method
         self.threshold = threshold
@@ -86,11 +86,11 @@ def partition(dataset, query):
 if __name__ == '__main__':
     # data = process_file()[1:]   # omitting the column headers
     # t_rows, f_rows = partition(data, 1, 'high')
-    q = Query(1, ">", 0.6)
-    test_data = [[1,0.5, 'False'],
-                 [2, 0.7, 'True'],
-                [3,0.4, 'False'],
-                [4, 0.8, 'True']
+    q = Query(2, "==", 'high')
+    test_data = [[1,0.5,'high', 'False'],
+                 [2, 0.7,'low', 'True'],
+                [3,0.4,'mdeium', 'False'],
+                [4, 0.8,'high','True']
                 ]
     for i in test_data:
         print(i)
