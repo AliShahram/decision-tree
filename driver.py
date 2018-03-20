@@ -2,6 +2,8 @@
 import sys
 
 def process_file():
+    # Needs better error handling mechanism
+    # i.e. should exit if no file is passed
     try:
         data_file = sys.argv[1]
         data_as_list = []

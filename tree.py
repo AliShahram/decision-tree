@@ -63,13 +63,12 @@ class Query():
         print("reprsnt")
         pass
 
-def partition(dataset, query, threshold_val):
-    """Partition the dataset into true and false based on the threshold
+def partition(dataset, query):
+    """Partition the dataset into true and false based on the query passed
     
     Parameters:
     dataset: a list of rows to be partitioned
-    query: the question/critieria we will evaluate on, in the form of col num
-    threshold_val: the value that is going to separate the dataset into T/F
+    query: the question/critieria we will evaluate on, a Query() object
 
     Return:
     two lists containing the true rows and false rows
@@ -77,7 +76,7 @@ def partition(dataset, query, threshold_val):
     true_rows, false_rows = [], []
 
     for row in dataset:
-        if row[query] == threshold_val:
+        if query.perform(row):
             true_rows.append(row)
         else:
             false_rows.append(row)
@@ -85,8 +84,8 @@ def partition(dataset, query, threshold_val):
     return true_rows, false_rows
 
 if __name__ == '__main__':
-    data = process_file()[1:]   # omitting the column headers
-    t_rows, f_rows = partition(data, 1, 'high')
+    # data = process_file()[1:]   # omitting the column headers
+    # t_rows, f_rows = partition(data, 1, 'high')
     q = Query(1, ">", 0.6)
     test_data = [[1,0.5, 'False'],
                  [2, 0.7, 'True'],
@@ -96,5 +95,5 @@ if __name__ == '__main__':
     for i in test_data:
         print(i)
         print(q.perform(i))
-    #print("True ", t_rows)
-    #print("False ", f_rows)
+
+    print(partition(test_data, q))

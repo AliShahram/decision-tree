@@ -2,7 +2,7 @@
 Decision Tree Machine Learning Algorithm. Implemented using Python
 
 # Contributors
-Ali Shahram Musavi, Swomma Roy, and Sirajus Salekin
+Ali Shahram Musavi, Sowmma Roy, and Sirajus Salekin
 
 # Status
 In-progress
