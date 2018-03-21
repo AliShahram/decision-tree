@@ -16,5 +16,3 @@ def file_parsed(input_file):
 	header = ['size', 'color', 'earshape', 'tail', 'iscat']
 	return output_list, header
 		
-file_parsed("pets.txt")
-

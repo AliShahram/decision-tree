@@ -4,12 +4,15 @@ import operator
 import math
 from input_tree import *
 
-def build_tree():
-    pass
+class Leaf:
+    def __init__(self, rows):
+        self.predictions = val_freq(rows)
 
-class Tree:
-    def __init__(self):
-        pass
+class DecisionNode:
+    def __init__(self, query, true_branch, false_branch):
+        self.query = query
+        self.true_branch = true_branch
+        self.false_branch = false_branch
 
 class Query():
     """Query is the criteria we use to partition a dataset.
@@ -62,10 +65,10 @@ class Query():
             return False
 
     def __repr__(self):
-        print("reprsnt")
-        pass
-
-
+        return("Is {} {} {}".format(
+                            header[self.column], 
+                            self.eval_method,
+                            self.threshold))
 
 def partition(dataset, query):
     """Partition the dataset into true and false based on the query passed
@@ -175,35 +178,98 @@ def best_query(rows):
 
     return final_gain, final_query
 
+def build_tree(rows):
+    gain, query = best_query(rows)
 
+    # base case
+    if gain == 0:
+        return Leaf(rows)
 
-
-if __name__ == "__main__":
-    rows, header = file_parsed("pets.txt")
-
-        
-   
+    true_rows, false_rows = partition(rows, query)
     
+    true_branch = build_tree(true_rows)
+    false_branch = build_tree(false_rows)
 
+    return DecisionNode(query, true_branch, false_branch)
 
+def build_tree_alt(rows):
+    # consider one column
+    # get all the decision
+    # if the info
+    pass 
 
+def classify(row, node):
+    if isinstance(node, Leaf):
+        return node.predictions
 
+    if node.query.perform(row):
+        return classify(row, node.true_branch)
+    else:
+        return classify(row, node.false_branch)
 
+def print_tree(node, spacing=""):
+    
+    if isinstance(node, Leaf):
+        print(spacing+ "Predict", node.predictions)
+        return
 
-"""
-if __name__ == '__main__':
-    # data = process_file()[1:]   # omitting the column headers
-    # t_rows, f_rows = partition(data, 1, 'high')
-    q = Query(1, ">", 0.6)
-    test_data = [[1,0.5, 'False'],
-                 [2, 0.7, 'True'],
-                [3,0.4, 'False'],
-                [4, 0.8, 'True']
-                ]
-    for i in test_data:
-        print(i)
-        print(q.perform(i))
+    print(spacing+str(node.query))
 
-    print(partition(test_data, q))
+    print(spacing+ "|--> True:")
+    print_tree(node.true_branch, spacing +"  ")
 
-    """
+    print(spacing+ "|--> False:")
+    print_tree(node.false_branch, spacing+"  ")
+
+def accuracy_test(rows):
+
+    total_accuracy = 0.0
+    total_elements = len(rows)
+
+    for i, row in enumerate(rows):
+        singled_out = row
+        rows.remove(row)
+        remaining_rows = rows
+        actual_label = row[-1]        
+ 
+        node = build_tree(remaining_rows)
+        result = classify(singled_out, node)       
+        
+        print(result)
+        # either 'yes' or 'no' prediction
+        if len(result) == 1:
+            if actual_label in result:
+                total_accuracy += 1
+                continue
+            else:
+                total_accuracy += 0
+                continue
+        # both 'yes' and 'no' prediction
+        else:
+            prob_correct = result[actual_label]
+            if actual_label == 'yes':
+                incorrect_label = 'no'            
+                #prob_incorrect = result[incorrect_label]
+            else:
+                incorrect_label = 'yes'
+            prob_incorrect = result[incorrect_label]
+
+            total_prob = prob_correct + prob_incorrect
+            accuracy_for_this_test = prob_correct/total_prob
+            
+        total_accuracy += accuracy_for_this_test
+
+        rows.append(singled_out)
+
+    final_accuracy = (total_accuracy / total_elements)
+
+    return final_accuracy
+ 
+    
+if __name__ == "__main__":
+    rows, header = file_parsed("dataset/titanic2.txt") 
+
+    accuracy = accuracy_test(rows)
+    print("accuracy ", accuracy * 100, "%.")
+    
+    

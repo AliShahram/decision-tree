@@ -1,4 +1,3 @@
-size	color	earshape	tail	iscat
 tiny	white	pointed	yes	no
 tiny	white	pointed	yes	yes
 tiny	brown	pointed	yes	no
