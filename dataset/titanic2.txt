@@ -1,3 +1,4 @@
+pclass	age	sex	survived
 1st	adult	male	yes
 1st	adult	male	yes
 1st	adult	male	yes

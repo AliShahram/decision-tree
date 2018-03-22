@@ -5,17 +5,24 @@ Decision Tree Machine Learning Algorithm. Implemented using Python
 Ali Shahram Musavi, Sowmma Roy, and Sirajus Salekin
 
 # Status
-In-progress
+**Finished**
 
-# How to Run
+# Quickrun
 We are using Python 3.5 for the development enviornment, so you might
-want to make sure Python35 is installed.
+want to make sure Python35 is installed. Also, `cd` into decision-tree
+directory if you are not already, and make sure the `driver.py` file
+is there.
+
+```
+python driver.py dataset/{filename}.txt
+```
+
+You will be greeted with instructions after that, and you can follow
+them easily.
 
 # To Do
 
-- [ ] Process the data set
-- [ ] build a tree
-- [ ] test for accuracy
+- [x] Process the data set
+- [x] build a tree
+- [x] test for accuracy
 
-# Test Coverage
-- 0.00%
