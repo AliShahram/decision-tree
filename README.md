@@ -26,3 +26,6 @@ them easily.
 - [x] build a tree
 - [x] test for accuracy
 
+# Acknowledgement
+We followed the tutorial from Google's ML lessons, taught by
+Josh Gordon. The YouTube link is [here](https://youtu.be/LDRbO9a6XPU).
