@@ -39,7 +39,7 @@ class Query():
         | 7.0  |green|tennis|
         +------+-----+------+
     and we want to evaluate whether the radius is >=5.0, we will need a Query
-    object in the form of Query(0,>=,5.0). This class has a method that will
+    object in the form of Query(0,5.0,">="). This class has a method that will
     evaluate the question for a given row
     """
 
@@ -81,7 +81,3 @@ class Query():
         final_string = "Is %s "+init_string + str(self.column)
 
         return final_string
-        #return (self.column, "{} {}".format(
-        #                    #header[self.column], 
-        #                    self.eval_method,
-        #                    self.threshold))

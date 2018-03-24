@@ -80,15 +80,12 @@ class DecisionTree(object):
 
 
         for column in range(num_labels):
-
-            samples = set([row[column] for row in rows])        #Finding the unique vals
-                                                                #in each column
-
+            # Finding unique values in each column
+            samples = set([row[column] for row in rows])
             for value in samples:
                 question = Query(column, value)
 
                 #split the data set
-
                 true_rows, false_rows = self.partition(rows, question)
 
                 #If the partition doesn't work 
